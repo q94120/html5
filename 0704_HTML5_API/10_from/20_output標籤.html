@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+</head>
+
+<body>
+    <pre>
+        value
+        1. input
+        2. select
+        3. output
+    </pre>
+
+    <!-- 10. 在表單中使用 <input type="range"> 並且透過 <span> 顯示數值 -->
+        <input type="range" id="putput" oninput="hehe.innerText = putput.value"> <span id="hehe"></span>
+    <!-- 20. 在表單中使用 <input type="range"> 並且透過 <output> 顯示數值 -->
+        <input type="range" id="downdown" oninput="haha.value = downdown.value">
+        <output id="haha"></output>
+        <hr>
+        <textarea col="30" row="5" id="text"></textarea>
+        <p>剩餘字數:<output id="count"></output></p>
+        <script>
+            let x = 10;
+            count.value = x;
+
+            text.oninput = function (){
+                // console.log(text.value);
+                count.value = x - text.value.length;
+                if(count.value <= 0){
+                    text.value = text.value.slice(0, x);
+                    count.value = 0;
+                }
+            }
+        </script>
+</body>
+
+</html>

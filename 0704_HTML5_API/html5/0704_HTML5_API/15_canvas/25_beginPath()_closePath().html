@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    
+    <h4>CanvasRenderingContext2D.closePath()</h4>
+    <p><a href='https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath'>https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath</a></p>
+
+    <span>無 closePath() </span> <br>
+    <canvas id="myCanvas1" width="300" height="150" style="border:1px solid #7a7a7a;"></canvas> <br><br>
+    
+    <span>有 closePath() </span> <br>
+    <canvas id="myCanvas2" width="300" height="150" style="border:1px solid #7a7a7a;"></canvas> <br><br>
+ 
+    <script>
+        
+        // 10. 透過畫線條測試 beginPath() 和 closePath()
+    
+        // v1: 無 beginPath() 和 closePath()
+        /** @type {HTMLCanvasElement} */
+        var cv1 = document.getElementById("myCanvas1");
+        var ctx1 = cv1.getContext("2d");
+        ctx1.strokeStyle = "black";
+        ctx1.moveTo(50, 50);
+        ctx1.lineTo(100, 50);
+        ctx1.lineTo(100, 100);
+        ctx1.lineTo(150, 100);
+        ctx1.stroke();
+
+
+        // v2: 有 beginPath() 和 closePath()
+        /** @type {HTMLCanvasElement} */
+        var cv2 = document.getElementById("myCanvas2");
+        var ctx2 = cv2.getContext("2d");
+        ctx2.strokeStyle = "black";
+        ctx2.beginPath();
+
+        ctx2.moveTo(50, 50);
+        ctx2.lineTo(100, 50);
+        ctx2.lineTo(100, 100);
+        
+        ctx2.lineTo(150, 100);
+        ctx2.closePath();
+        ctx2.stroke();
+    </script>
+
+</body>
+
+</html>

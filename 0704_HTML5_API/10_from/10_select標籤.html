@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+</head>
+
+<body>
+
+    <!-- 10. 設計一組下拉選單，並設定為多選 -->
+    <select id="demoA">
+        <option value="Appap">apple</option>
+        <option value="Bbbab">cat</option>
+        <option value="Cccac">Rani</option>
+    </select>
+    <hr>
+    <select id="demoB" size="5" multiple>
+        <option value="33">火腿蛋</option>
+        <option value="44">豬肉滿福堡</option>
+        <option value="55">薯餅</option>
+        <option value="10">小溫紅</option>
+        <option value="15">中溫紅</option>
+    </select>
+    <!-- 20. 安排幾顆按鈕，稍後進行測試 -->
+    <!--    * btnSingle & btnOKv1 & btnOKv2 ... -->
+    <button id="btnSingle">btnSingle</button>
+    <button id="btnOKv1">btnOKv1</button>
+    <button id="btnOKv2">btnOKv2</button>
+    <script>
+
+        // 30. 若選單只有選擇一個
+        //     測試 select 物件的 selectedIndex & value 會出來什麼值
+        btnSingle.onclick = function(){
+            console.log(demoA.value, demoA.selectedIndex);
+        }
+        // 40. 若選單選取多項，該如何獲得所有被選到的項目?
+        //     測試 select 物件的 selectedOptions
+        btnOKv1.onclick = function(){
+            let x = document.getElementById('demoB').selectedOptions;
+            // console.log(x);
+            for(let p = 0; p < x.length; p++){
+                console.log(x[p].innerText , x[p].value);
+            }
+        }
+        btnOKv2.onclick = function(){
+            let x = document.getElementById('demoB');
+            for(let k = 0; k < x.length; k++){
+            // console.log(x[k].innerText, x[k].selected);
+                if(x[k].selected){
+                    // 未來: 呼叫ajax寫入資料庫
+                    // 現在: 在主控台看有沒有抓到
+                    console.log(x[k].innerText , x[k].value);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

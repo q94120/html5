@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        canvas 大小預設是w300 h150
+    </pre>
+    <!-- 10. #myCanvas1 試著用 html屬性 指定畫布的寬高 -->
+     <canvas id="myCanvas1" width="200px" height="200px"></canvas>
+     <hr>
+     <!-- 20. #myCanvas2 試著用 css樣式 指定畫布的寬高  -->
+     <canvas id="myCanvas2" style="width: 200px; height: 200px;"></canvas>
+    <script>
+        var cv1 = document.getElementById("myCanvas1");
+        var ctx1 = cv1.getContext("2d");
+        ctx1.fillRect(0, 0, 100, 100);
+    
+        var cv2 = document.getElementById("myCanvas2");
+        var ctx2 = cv2.getContext("2d");
+        ctx2.fillRect(0, 0, 100, 100);
+    </script>
+
+</body>
+
+</html>

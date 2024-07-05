@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="300" height="150" style="border:1px solid #7a7a7a;"></canvas>
+    
+    <script>
+
+        // 10. 測試 fillRect() 、 clearRect() 、 strokeRect()
+        //      * context.fillRect(x, y, width, height);
+        //      * context.clearRect(x, y, width, height);
+        //      * context.strokeRect(x, y, width, height);
+        
+        /** @type {HTMLCanvasElement} */
+        var cv = document.getElementById("myCanvas");
+        var ctx = cv.getContext("2d");
+
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(0, 0, 150, 150);
+        ctx.clearRect(50, 50, cv.width, cv.height);
+        ctx.strokeRect(50, 50, 150, 150);
+    </script>
+
+</body>
+
+</html>

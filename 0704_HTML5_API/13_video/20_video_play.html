@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      video,
+      progress {
+        width: 50%;
+      }
+      progress {
+        height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 10. 透過 <video> 載入一個影片 -->
+    <!--    * 不指定 controls 屬性，稍後透過按鈕控制 -->
+    <!--    * #myVideo -->
+    <video id="myVideo" src="./w3school.mp4"></video>
+    <progress id="videoProgress" min="0" max="100" value="0"></progress>
+    <!-- 20. 設計三個按鈕，分別用於控制影片播放、影片靜音和影片全螢幕 -->
+    <!--    * #btnPlay 、 #btnMute 、 #btnFullScreen -->
+    <button id="btnPlay">播放</button>
+    <button id="btnMute">靜音</button>
+    <button id="btnFullScreen">全螢幕</button>
+    <hr />
+
+    <!-- 30. 透過 <input type="range">  控制聲音大小 -->
+    <label for="inputVolume">控制聲音大小：</label>
+    <input id="inputVolume" type="range" min="0" max="1" step="0.01" />
+    <span id="volume"></span>
+    <br />
+
+    <!-- 32. 透過 <input type="number"> 控制播放倍速 -->
+    <label for="inputRate">控制播放倍速：</label>
+    <input id="inputRate" type="number" min="0.5" max="16" step="0.5" />
+    <hr />
+
+    <!-- 35. 透過 <progress>  顯示|控制影片進度 -->
+    
+
+    <script>
+      // 40. 網頁全部內容載入後觸發 window.onload 事件
+      window.onload = function () {
+        // 50. 透過 video物件 的 paused 屬性取得當前影片撥放狀態
+        //     依 paused 屬性 決定呼叫 play() 或者 pause()
+        //     並改變按鈕顯示文字
+        //      * #btnPlay
+        //      * #myVideo.play()
+        //      * #myVideo.pause()
+        btnPlay.onclick = function () {
+          let myVideo = document.getElementById("myVideo");
+          console.log("myVideo.paused true是播放中,反之", myVideo.paused);
+
+          if (myVideo.paused == true) {
+            myVideo.play();
+            document.getElementById("btnPlay").innerText = "暫停";
+          } else {
+            myVideo.pause();
+            document.getElementById("btnPlay").innerText = "播放";
+          }
+        };
+        // 52. 透過 video物件 的 muted 屬性取得當前影片是否為靜音
+        //      * #btnMute
+        //      * #myVideo.muted
+        btnMute.onclick = function () {
+          console.log("myVideo.muted 是否靜音:", myVideo.muted);
+          // 是否靜音 -> false -> 沒有靜音 / 有聲音
+          if (myVideo.muted == false) {
+            // 是否靜音 -> true -> 有靜音 === 沒有聲音
+            myVideo.muted = true;
+            // 上一行程式碼設定靜音了，所以按鈕應該呈現?
+            document.getElementById("btnMute").innerText = "取消靜音";
+          } else {
+            myVideo.muted = false;
+            document.getElementById("btnMute").innerText = "靜音";
+          }
+        };
+
+        // // 55. 測試下列下列程式碼
+        //      * #btnFullScreen
+        // console.log(`a: ${myVideo.requestFullscreen}`);
+        // console.log(`b: ${myVideo.mozRequestFullScreen}`);
+        // console.log(`c: ${myVideo.webkitRequestFullscreen}`);
+        btnFullScreen.onclick = function () {
+          console.log(`a: ${myVideo.requestFullscreen}`);
+          console.log(`b: ${myVideo.mozRequestFullScreen}`); // undefined
+          console.log(`c: ${myVideo.webkitRequestFullscreen}`);
+
+          if (myVideo.mozRequestFullScreen){
+            myVideo.mozRequestFullScreen();
+          } else if (myVideo.requestFullscreen){
+            myVideo.requestFullscreen();
+          } else if (myVideo.webkitRequestFullscreen){
+            myVideo.webkitRequestFullscreen();
+          } else {
+            alert('您的瀏覽器不支援全螢幕播放');
+          }
+        };
+        // 60. 將 #inputVolume 讀取到的數值
+        //     設定給 video物件 的 volume 屬性
+        //      * #myVideo.volume
+        // oninput 音量有改變就會去設定
+        // onchange 音量有改變 結束  才會去設定
+        inputVolume.onchange = function () {
+            myVideo.volume = inputVolume.value;
+            // console.log(inputVolume.value);
+            volume.innerText = parseFloat(inputVolume.value) * 100;
+        }
+        // 62. 將 #inputRate 讀取到的數值
+        //     設定 video物件 的 playbackRate 屬性
+        //      * #myVideo.playbackRate
+        inputRate.onchange = function () {
+            myVideo.playbackRate = inputRate.value;
+            // console.log(inputRate.value);
+        }
+        // 70. 設定 video物件 的 ontimeupdate 事件
+        //     將影片播放進度更新給 #videoProgress
+        //      * #videoProgress.value
+        //      * #myVideo.currentTime
+        //      * #myVideo.duration
+        //      * 當前進度的計算公式：____________
+        myVideo.ontimeupdate = function () {
+            // console.log('皮卡');
+            // console.log(myVideo.currentTime);
+            // console.log(myVideo.duration);
+            // console.log(myVideo.currentTime / myVideo.duration * 100);
+            videoProgress.value = myVideo.currentTime / myVideo.duration * 100;
+            // console.log(videoProgress.value);
+            console.log(myVideo.currentTime / myVideo.duration * 100);
+        }
+        // 75. 當滑鼠點選+拖動 #videoProgress 時，透過拖曳可以改變影片進度
+        //      * event.offsetX
+        //      * #videoProgress.offsetWidth
+        //      * #myVideo.currentTime
+        //      * #myVideo.duration
+
+        document.getElementById("videoProgress").onmousedown = function () {
+            console.clear();
+            let prog = (event.offsetX) / videoProgress.offsetWidth;
+            console.log('按下', event.offsetX, videoProgress.offsetWidth, prog);
+            myVideo.currentTime = prog * myVideo.duration;
+            console.log(myVideo.currentTime);
+            myVideo.pause();
+            document.getElementById("btnPlay").innerText = "播放";
+        }
+        document.getElementById("videoProgress").onmouseup = function () {
+            console.log('放開');
+            myVideo.play();
+            document.getElementById("btnPlay").innerText = "暫停";
+        }
+        
+      };
+    </script>
+  </body>
+</html>

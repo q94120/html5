@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        div{ width: 350px;height: 150px; border: 1px solid #aaaaaa;}
+    </style>
+</head>
+
+<body>
+
+    <h4>HTML Drag and Drop API</h4>
+    <p><a href='https://www.w3schools.com/html/html5_draganddrop.asp'>https://www.w3schools.com/html/html5_draganddrop.asp</a></p>
+    <h4>Common MIME types</h4>
+    <p><a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types'>https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types</a></p>
+
+    <!-- 10. 設計一個 <div>
+        建立 ondragover 和 ondrop 兩個事件-->
+
+    <!-- 20. 設計一個 <img> 
+        設定 id 屬性為 testImage、
+        draggable 屬性 為true 和 建立 ondragstart 事件-->
+
+    <script>
+        // 40. ondragover 拖動過程中，允許元素接受 drop 
+        //      * event.preventDefault();
+
+        // 50. ondragstart 當元素開始被拖動的時候，紀錄元素id
+        //      * event.target.id;
+        //      * event.dataTransfer.setData();
+        
+        // 60. ondrop 滑鼠放開時，將元素附加到指定位置
+        //      * event.dataTransfer.getData()
+        //      * event.target.appendChild()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+</head>
+ 
+<body>
+ 
+    <pre>
+        想要檢查使用者的輸入,符合指定的格式
+        ->regular expressions
+        ->正規表達式
+    </pre>
+ 
+    <h4>JavaScript RegExp Reference</h4>
+    <p><a
+            href='https://www.w3schools.com/jsref/jsref_obj_regexp.asp'>https://www.w3schools.com/jsref/jsref_obj_regexp.asp</a>
+    </p>
+    <h4>RegExr: Learn, Build, & Test RegEx</h4>
+    <p><a href='https://regexr.com/'>https://regexr.com/</a></p>
+    <hr>
+ 
+    <!-- 10. 透過html所提供的屬性，限制|檢查使用者所輸入的資料 -->
+    <!--    a. 姓名欄位為必要輸入 -->
+    <!--    b. 手機欄位必須符合台灣手機格式 -->
+    <!--    c. 郵遞區號欄位必須符合台灣郵遞區號格式 -->
+ 
+    <label for="userName">姓　　名：</label>
+    <input type="text" id="userName" name="userName" required>
+    <span id="di" style="color: red;"></span><br>
+ 
+    <label for="userPhone">手　　機：</label>
+    <input type="tel" id="userPhone" name="userPhone" pattern="09[0-9]{8}"> <br>
+ 
+    <label for="zipcode">郵遞區號：</label>
+    <input type="text" id="zipcode" name="zipcode" pattern="[0-9]{3}|[0-9]{5}|[0-9]{6}">
+    <!-- 也可以改寫成全正規表達式 pattern="^\d{3}$/|^\d{5}$/|^\d{6}$/" -->
+    <span>*稍後測試用</span>
+    <br><br>
+ 
+    <button id="btnSent">我是送出按鈕</button>
+ 
+    <script>
+        btnSent.onclick = function () {
+            // 15. 取得 #userName 並觀察 #userName 底下的 validity 物件
+            //      * userName.validity
+            //      * userName.validity.valueMissing
+            // console.log(userName.validity); // 物件:N種驗證的狀態
+            console.log(userName.validity.valueMissing);
+            if (userName.validity.valueMissing) {
+                di.innerText = "*請輸入姓名";
+            } else {
+                di.innerText = "";
+            }
+            console.log(userPhone.validity.patternMismatch); //
+            // 使用者沒有輸入 ->             patternMismatch : false
+            // 使用者有輸入   -0911222333 -> patternMismatch : false
+            // 使用者有輸入   -1234567890 -> patternMismatch : true
+
+            // 20. 取得 #userPhone 並觀察 #userPhone 底下的 validity 物件
+            //      * userPhone.validity.patternMismatch
+ 
+            // 25. 若 #userPhone 驗證不通過
+            //      * setCustomValidity() 設定錯誤訊息
+            //      * reportValidity()    提示錯誤訊息
+            if (userPhone.validity.patternMismatch) {
+                userPhone.setCustomValidity("你打的手機資料不符合規則啦～ ˋˊ 百變怪");
+                userPhone.reportValidity();
+            } else {
+                userPhone.setCustomValidity("");
+                userPhone.reportValidity();
+            }
+ 
+            // 30. 取得 #zipcode 並觀察 #zipcode 底下的 validity 物件
+            // 35. 若驗證不通過，自行定義錯誤訊息並顯示到 <span>*稍後測試用</span>
+            document.querySelector("#zipcode+span").innerText =
+                zipcode.validity.patternMismatch ? "郵遞區號有問題-郵遞百變怪" : "";
+ 
+        }
+    </script>
+ 
+</body>
+ 
+</html>

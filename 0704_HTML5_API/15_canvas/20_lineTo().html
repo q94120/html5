@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    
+    <h4>HTML canvas lineTo() Method</h4>
+    <p><a href='https://www.w3schools.com/tags/canvas_lineto.asp'>https://www.w3schools.com/tags/canvas_lineto.asp</a></p>
+    
+    <canvas id="myCanvas" width="500" height="150" style="border:1px solid #7a7a7a;"></canvas>
+
+    <script>
+        // 10. 測試 繪製線段
+        //      * context.strokeStyle=color|gradient|pattern;
+        //      * context.moveTo(x, y);
+        //      * context.lineTo(x, y);
+        //      * context.stroke();
+        
+        /** @type {HTMLCanvasElement} */
+        var cv = document.getElementById("myCanvas");
+        var ctx = cv.getContext("2d");
+
+        // 20. 試著在畫布正中間畫出 ＋
+        let w = cv.width;
+        let h = cv.height;
+
+        ctx.strokeStyle = "red";
+        ctx.moveTo(0, 0);
+        ctx.lineTo(w/2, h);
+        
+        
+        ctx.moveTo(w/2, h);
+        ctx.lineTo(w/2, 0);
+
+        ctx.moveTo(w/2, h);
+        ctx.lineTo(w, 0);
+        
+
+        ctx.moveTo(0, h/2);
+        ctx.lineTo(w, h/2);
+        
+        
+        ctx.stroke();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- font-awesome 4.7.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+   <!-- 10. 試著透過上方的 font-awesome 或  Material Icons 改變播放圖示 -->
+   <h4>Font Awesome Introduction</h4>
+   <p><a href='https://www.w3schools.com/icons/fontawesome_icons_intro.asp'>https://www.w3schools.com/icons/fontawesome_icons_intro.asp</a></p>
+   <h4>Google Icons Introduction</h4>
+   <p><a href='https://www.w3schools.com/icons/google_icons_intro.asp'>https://www.w3schools.com/icons/google_icons_intro.asp</a></p>
+
+
+<i id="demoA" class="fa fa-circle-o-notch fa-spin"></i>
+
+<i  class="fa fa-spinner fa-pulse"></i>
+<hr>
+<i id="demoB" class="material-icons" style="font-size:36px">play_arrow</i>
+<h1 id="pause_circle_outline" class="material-icons" style="font-size:36px">pause_circle_outline</h1>
+<script>
+    $('#demoA').click(function(){
+        let x = $('#demoA').hasClass('fa fa-circle-o-notch fa-spin');
+    // console.log(x);
+    if (x) {
+        $('#demoA').removeClass('fa fa-circle-o-notch fa-spin');
+        $('#demoA').addClass('fa fa-spinner fa-pulse');
+    } else {
+        // $('#demoA').removeClass('fa fa-spinner fa-pulse');
+        // $('#demoA').addClass('fa fa-circle-o-notch fa-spin');
+        $('#demoA').removeClass('fa fa-spinner fa-pulse').addClass('fa fa-circle-o-notch fa-spin')
+    }
+    })
+    
+    demoB.onclick = function (){
+        if (demoB.innerText == 'play_arrow'){
+            demoB.innerText ='pause_circle_outline';
+        } else {
+            demoB.innerText = 'play_arrow';
+        }
+    }
+</script>
+</body>
+
+</html>
