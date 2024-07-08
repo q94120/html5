@@ -1,20 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    
+  <body>
+    <input type="color" id="colorInput" />
+    <button id="btnClean">clean</button>
+    <br />
+    <button>選擇檔案</button>
+    <span>未選擇任何檔案</span>
+    <hr />
+    <p>第一版</p>
+    <canvas
+      id="myCanvas"
+      width="350"
+      height="200"
+      style="border: 1px solid #7a7a7a"
+    ></canvas>
+    <hr />
+    <p>第二版(畫直線)</p>
+    <canvas
+      id="myCanvas2"
+      width="350"
+      height="200"
+      style="border: 1px solid #7a7a7a"
+    ></canvas>
     <!-- 10. 準備調色盤、清除畫布按鈕、畫布本人 -->
 
     <script>
-        // 20. 觀察結果，條列出所需要的事件
+      // 20. 觀察結果，條列出所需要的事件
+      /** @type {HTMLCanvasElement} */
+      let x = document.getElementById("myCanvas");
+      let pen = x.getContext("2d");
+      let flag = false;
 
-        // 30. 觀察結果，條列出畫布所需要的功能
+      x.onmousedown = function (event) {
+        // 1. 設定畫筆顏色
+        // 2. 開始一段路徑
+        // 3. pen移動到滑鼠點下去的地方
+
+        // console.log(cat);
+        flag = true;
+        pen.strokeStyle = colorInput.value;
+        pen.beginPath();
+        pen.moveTo(event.offsetX, event.offsetY);
+      };
+
+      x.onmousemove = function (event) {
+        // console.log(this);
+        // 1. 看滑鼠在哪裡線就在哪裡
+        // 2. stroke
+        if (flag == true) {
+          pen.lineTo(event.offsetX, event.offsetY);
+          pen.stroke();
+        }
+      };
+
+      x.onmouseup = function () {
+        // console.log(this);
+        flag = false;
+      };
+
+      x.onmouseenter = function (event) {
+        // 1. 設定畫筆顏色
+        // 2. 開始一段路徑
+        // 3. pen移動到滑鼠點下去的地方
+        // 4.要怎麼知道使用者的滑鼠有沒有按著
+        // console.clear();
+        // console.log(event.button);
+        // console.log(event.buttons);
+        if (event.buttons) {
+          flag = true;
+          pen.strokeStyle = colorInput.value;
+          pen.beginPath();
+          pen.moveTo(event.offsetX, event.offsetY);
+        }
+      };
+
+      x.onmouseout = function () {
+        flag = false;
+      };
+
+      btnClean.onclick = function () {
+        pen.clearRect(0, 0, x.width, x.height);
+        ctx.clearRect(0, 0, x.width, x.height);
+        lineList = [];
+      };
+
+      // 30. 觀察結果，條列出畫布所需要的功能
+      /** @type {HTMLCanvasElement} */
+      let x1, x2, y1, y2;
+      let cv = document.getElementById("myCanvas2");
+      let ctx = cv.getContext("2d");
+      let flag2 = false;
+      let lineList = [];
+
+      cv.onmousedown = function (event) {
+        flag2 = true;
+        x1 = event.offsetX;
+        y1 = event.offsetY;
+      };
+
+      cv.onmousemove = function (event) {
+        if (flag2) {
+          x2 = event.offsetX;
+          y2 = event.offsetY;
+
+          ctx.clearRect(0, 0, cv.width, cv.height);
+          // 讀取使用者之前畫過的線段，並畫出來
+          lineList.forEach((line) => {
+            drawLine(line.bx, line.by, line.ex, line.ey);
+          });
+          drawLine(x1, y1, x2, y2);
+        }
+      };
+
+      function drawLine(a, b, c, d) {
+        ctx.beginPath();
+        ctx.moveTo(a, b);
+        ctx.lineTo(c, d);
+        ctx.stroke();
+      }
+      
+      cv.onmouseup = function () {
+        flag2 = false;
+        lineList.push({
+          bx: x1,
+          by: y1,
+          ex: x2,
+          ey: y2,
+        });
+      };
     </script>
-</body>
-
+  </body>
 </html>

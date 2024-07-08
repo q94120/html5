@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-</head>
-
-<body>
+  <body>
+    <input type="file" id="apple" multiple />
     <!-- 10. 和上一個檔案雷同，請改為讀取多個圖片的版本 -->
     <script>
-        
-    </script>
-</body>
+      document.getElementById("apple").addEventListener("change", function () {
+        console.log(apple.files);
+        console.log(apple.files.length);
 
+        for (let index = 0; index < apple.files.length; index++) {
+          let pika = new FileReader();
+          pika.onload = function () {
+            let myNewImage = new Image();
+            // myNewImage.setAttribute("src", pika.result);
+            myNewImage.src = pika.result;
+            // console.log(myNewImage.src);
+            document.body.append(myNewImage);
+          };
+          pika.readAsDataURL(apple.files[index]);
+        }
+      });
+    </script>
+  </body>
 </html>

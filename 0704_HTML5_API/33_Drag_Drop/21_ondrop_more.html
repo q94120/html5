@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      div {
+        width: 350px;
+        height: 150px;
+        border: 1px solid #aaaaaa;
+      }
+    </style>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+  <body>
+    <div style="display: flex; border: 1px solid black">
+      <div
+        style="flex: 1"
+        ondragover="divOver(event)"
+        ondrop="divDrop(event)"
+      ></div>
+      <div style="flex: 1" ondragover="divOver(event)" ondrop="divDrop(event)">
+        <img
+          id="IU"
+          width="100px"
+          src="../images/unnamed.jpg"
+          draggable="true"
+          ondragstart="imageStart(event)"
+        />
+        <img
+          id="pika"
+          width="50px"
+          src="../images/迷你Q.jpg"
+          draggable="true"
+          ondragstart="imageStart(event)"
+        />
+      </div>
+    </div>
 
-<body>
+    <div id="123" draggable="true" ondragstart="imageStart(event)" style="background-color: pink; width: 100px;">
+        <h1>皮卡丘</h1>
+    </div>
     <script>
-        // 10. 參考執行結果，條列所需的 樣式以及事件
-    </script>
-</body>
+      // 10. 參考執行結果，條列所需的 樣式以及事件
+      function imageStart(eventObject) {
+        console.log("確認是否有收到物件:", eventObject);
+        console.log("想知道發生:", eventObject.target);
+        console.log(":", eventObject.target.id);
 
+        eventObject.dataTransfer.setData("text", eventObject.target.id);
+      }
+
+      function divOver(eventObject) {
+        console.log("確認是否否有收到事件物件(B)", eventObject);
+        // eventObject.preventDefault();
+
+        // 問題: 目前有圖片吃掉圖片的情況
+        // 解決:
+        //       如果現在經過的是div則設定，eventObject.preventDefault();
+        //       如果現在經過的不是div則不要設定 eventObject.preventDefault();
+        if (eventObject.target.tagName == "DIV") {
+          eventObject.preventDefault();
+        }
+
+        
+      }
+
+      function divDrop(eventObject) {
+        console.log("確認是否否有收到事件物件(C)", eventObject);
+        eventObject.preventDefault();
+        var data = eventObject.dataTransfer.getData("text");
+        eventObject.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </body>
 </html>
